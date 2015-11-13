@@ -1,0 +1,75 @@
+<% content_for :title  do %>
+    <%= (@title)?  @title : 'rybyOnRails&Nodejs' %>
+<% end %>
+
+<div class="main-content" data-active='private_chat'>
+    <form class="form-search">
+        <div class="input-field">
+            <input class="validate" id="field_search" placeholder="Search" type="text" />
+        </div>
+        <button class="btn btn-close" type="reset"><i class="fa fa-times-circle"></i></button>
+    </form>
+    <div  class="list-user-chat" data-user='<%=session[:user]%>' data-massenger=''>
+        <ul class="group-user " >
+           <% @userAll.each do |u| %>
+                <li class="item-chat list-user pull-left <%= (session[:user] == u.id)? 'wait-js remove' : '' %>" data-user='<%=u.id%>' >
+                    <div class="item-panel" style = ' width: 100%;'>
+                        <div class="write-inbox">
+                            <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+                        </div>
+                        <div class="box-body box-user-name">
+                            <div class="box-inner box-name  "><span class='name-user on-off <%= (u.status == 1)? 'online' : '' %>' data-user='<%=u.id%>'><%= (u.status == 1)? 'online' : 'offline' %></span></div>
+                            <div class="box-main-comment">
+                            <div class="box-comment" data-user='<%=u.id%>'>
+                                <div class="box-inner"> <%= u.first_name + ' ' + ( u.last_name && ( u.last_name != 'nil' )? u.last_name : '') %></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="box-icon-user" id="box-icon-user">
+                            <div class="box-body-icon new-chat" data-user='<%=u.id%>'> <span class=""><i class="fa fa-weixin"></i></span></div>
+                            <div class="box-body-icon"> <span class=""><i class="fa fa-plus-circle"></i></span></div>
+                            <div class="box-body-icon"> <span class=""><i class="fa fa-trash-o"></i></span></div>
+                        </div>
+                        
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+
+<% content_for :popupMessenger do %>
+    <div class="modal" id="clean">
+        <div class="modal-content">
+            <div class="valign-wrapper">
+                <h5 class="valign center">
+                Are you sure to clean all messages?
+                </h5>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="valign-wraper">
+                <div class="valign center">
+                    <a href="<%=user_signup_path%>" class="modal-action modal-close waves-effect waves-green btn">Yes</a>
+                    <a class="modal-action modal-close waves-effect waves-green btn">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="sign-out">
+        <div class="modal-content">
+            <div class="valign-wrapper">
+                <h5 class="valign center">
+                Are you sure to sign out?
+                </h5>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="valign-wraper">
+                <div class="valign center">
+                    <a class="modal-action modal-close waves-effect waves-green btn">Yes</a><a class="modal-action modal-close waves-effect waves-green btn">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

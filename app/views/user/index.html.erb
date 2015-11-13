@@ -1,0 +1,32 @@
+<div id="wrappertop"></div>
+    <div id="wrappermiddle" class="wrappermiddle_signin">
+      <h2>Login</h2>
+      <%= form_tag(user_signin_path, method: "post") do %>
+      <div id="username_input" style="margin-top: 35px;">
+          <div id="username_inputleft"></div>
+            <div id="username_inputmiddle" >
+                <input type="text" name="email" id="url" placeholder="E-mail Address"  >
+                <%= image_tag("mailicon.png", :alt => "email icon", :id => "url_user") %>
+            </div>
+          <div id="username_inputright"></div>
+      </div>
+      <div id="password_input">
+          <div id="password_inputleft"></div>
+            <div id="password_inputmiddle">
+                <input type="text" name="password" id="url" placeholder="Password">
+                <%= image_tag("passicon.png", :alt => "", :id => "url_password") %>
+            </div>
+          <div id="password_inputright"></div>
+      </div>
+      <div id="submit" class="signin">
+        <%= image_submit_tag("submit_hover.png", :id => "submit1", :value => "Sign In") %>
+        <%= image_submit_tag("submit.png", :id => "submit2", :value => "Sign In" ) %>
+      </div>
+      <% end %>
+
+      <div id="links_left">
+        <%= link_to 'Forgot your Password?' %>
+      </div>
+      <div id="links_right">
+        <%= link_to 'Not a Member?', user_register_path %>
+      </div>

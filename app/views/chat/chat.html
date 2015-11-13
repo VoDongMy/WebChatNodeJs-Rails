@@ -1,0 +1,98 @@
+<% content_for :title  do %>
+    <span class="title"><i class="fa fa-weixin"></i></span><%= (@title)?  @title : 'rybyOnRails&Nodejs' %>
+<% end %>
+
+<div class="main-content" data-active='private_chat'>
+    <form class="form-search">
+        <div class="input-field">
+            <input class="validate" id="field_search" placeholder="Search" type="text" />
+        </div>
+        <button class="btn btn-close" type="reset"><i class="fa fa-times-circle"></i></button>
+    </form>
+    <div id="message-content" data-user='<%=session[:user]%>' data-massenger=''>
+        <ul class="group-chat wait-js" >
+       <% @mess.each do |m| %>
+            <li class="item-chat <%= (session[:user] == m.user_one) ? 'pull-right' : 'pull-left' %>" data-messenger ='<%= m.id %>' data-user-auth='<%=m.user_one%>'  data-to='<%=m.group_id%>'>
+                <div class="item-panel">
+                    <% if session[:user] != m.user_one %>
+                        <div class="write-inbox">
+                            <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+                        </div>
+                    <% end %>
+                    <div class="box-body">
+                        <div class="box-inner box-name <%=(session[:user] == m.user_one)? 'for-user' : ''%>"><span class='name-user'><%= m.first_name + ' ' + ( m.last_name && ( m.last_name != 'nil' )? m.last_name : '') %></span></div>
+                        <div class="box-main-comment">
+                        <div class="box-comment" data-messenger ='<%= m.id %>'  data-user-auth='<%=m.user_one%>'>
+                            <div class="box-inner"> <%= m.mess %></div>
+                        </div>
+                        </div>
+                    </div>
+                    <% if session[:user] == m.user_one %>
+                        <div class="write-inbox">
+                            <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+                        </div>
+                    <% end %>
+                </div>
+            </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+
+<% content_for :formChat do %>
+    <%= form_tag( ajax_insert_new_message_path, method: "post", onKeyPress: 'if (event.which == 13){ $("#sendMessage").trigger("click"); return false}') do %>
+        <div class="post-commnent" >
+            <div class="form-inline"></div>
+            <div class="action-commnent">
+                <a href="#!"><i class="fa fa-plus-circle"></i></a>
+            </div>
+            <div class="form-group" >
+                <div class="form-group-inner">
+                <%= text_field_tag :contentMessage, nil,class: 'form-contro', placeholder: "Message",id: "content_message" %>
+                <%= hidden_field_tag :ip, "0.0.0.0", class: 'ip-user' %>
+                    <div class="btn btn-post" data-user = '0' data-group = '<%=(@group)? @group : ''%>' id="sendMessage">Send</div>
+                </div>
+                <div class="form-group-inner-bottom" style="display: none">
+                    <!-- <button class="btn btn-location"><i class="fa fa-location-arrow"></i><span>Location</span></button>
+                    <button class="btn btn-photo"><i class="fa fa-camera"></i><span>Photo</span></button> -->
+                </div>
+            </div>
+        </div>
+    <% end %>
+<% end %>
+<% content_for :popupMessenger do %>
+    <div class="modal" id="clean">
+        <div class="modal-content">
+            <div class="valign-wrapper">
+                <h5 class="valign center">
+                Are you sure to clean all messages?
+                </h5>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="valign-wraper">
+                <div class="valign center">
+                    <a  class="modal-action modal-close waves-effect waves-green btn">Yes</a>
+                    <a class="modal-action modal-close waves-effect waves-green btn">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="sign-out">
+        <div class="modal-content">
+            <div class="valign-wrapper">
+                <h5 class="valign center">
+                Are you sure to sign out?
+                </h5>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="valign-wraper">
+                <div class="valign center">
+                    <a href="<%=user_signup_path%>" class="modal-action modal-close waves-effect waves-green btn">Yes</a>
+                    <a class="modal-action modal-close waves-effect waves-green btn">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

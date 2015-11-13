@@ -1,0 +1,20 @@
+<% binding.pry %>
+<li class="item-chat <%= (session[:user] == @m.user_one) ? 'pull-right' : 'pull-left' %>" data-user-auth='<%=@m.user_one%>' data-to='<%=@m.group_id%>'>
+    <div class="item-panel">
+        <% if session[:user] != @m.user_one %>
+            <div class="write-inbox">
+                <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+            </div>
+        <% end %>
+        <div class="box-body">
+            <div class="box-comment">
+                <div class="box-inner"> <%= @m.mess %></div>
+            </div>
+        </div>
+        <% if session[:user] == @m.user_one %>
+            <div class="write-inbox">
+                <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+            </div>
+        <% end %>
+    </div>
+</li>

@@ -1,0 +1,19 @@
+<!DOCTYPE html >
+<html xmlns="">
+<head>
+  <title>RubyOnRails</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="wrapper">
+  		<%= yield %>
+  </div>
+    <div id="wrapperbottom"></div>
+    <div id="powered">
+      <p>Powered by <a href="#">ruby on rails Control Panel</a></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<li class="item-chat <%= (session[:user] == @m.user_one) ? 'pull-right' : 'pull-left' %> wait-js " data-messenger='<%=@m.id %>' data-user-auth='<%=@m.user_one%>' data-to='<%=@m.group_id%>' type='<%= (@m.group_id)? 'U' : 'G'%>'>
+    <div class="item-panel">
+        <% if session[:user] != @m.user_one %>
+            <div class="write-inbox">
+                <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+            </div>
+        <% end %>
+        <div class="box-body" >
+            <div class="box-inner box-name <%=(session[:user] == @m.user_one)? 'for-user' : ''%>"><span class='name-user'><%= @m.first_name + ' ' + ( @m.last_name && ( @m.last_name != 'nil' )? @m.last_name : '') %></span></div>
+            <div class="box-main-comment">
+            <div class="box-comment" data-messenger ='<%= @m.id %>'  data-user-auth='<%= @m.user_one %>'>
+                <div class="box-inner"> <%= @m.mess %></div>
+            </div>
+            </div>
+        </div>
+        <% if session[:user] == @m.user_one %>
+            <div class="write-inbox">
+                <div class="symboy-inbox"><span class="avatar"><i class="fa fa-user"></i></span></div>
+            </div>
+        <% end %>
+    </div>
+</li>
