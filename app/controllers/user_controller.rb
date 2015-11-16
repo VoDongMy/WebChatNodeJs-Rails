@@ -57,16 +57,16 @@ class UserController < ApplicationController
     if auth()
       userOnOff = 1
       UserStatus.deleteStatus(session[:user],params[:socketId])
-      if !UserStatus.checkStatus(session[:user])
+      if (UserStatus.checkStatus(session[:user]) == 0)
         User.updateOnOff(session[:user], 0)
         userOnOff = 0
       end
-      render json: { success: true , statusUser: status, userOnOff: userOnOff }
+      render json: { success: true , statusUser: status,tab: UserStatus.checkStatus(session[:user]),  userOnOff: userOnOff }
     else
       redirect_to root_path
     end
   end
-
+  
   #logout 
   def logout
     if auth()

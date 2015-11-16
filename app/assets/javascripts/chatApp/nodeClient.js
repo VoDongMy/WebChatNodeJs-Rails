@@ -1,4 +1,4 @@
-var socket = io.connect('http://172.16.20.194:8080');
+var socket = io.connect('http://localhost:8080');
 var socketId = '';
 var userOnOff = '';
 $(document).ready(function() {
@@ -35,7 +35,6 @@ $(document).ready(function() {
 });
 
 socket.on('data', function(data) {
-    console.log(data);
     var dataAppend = '';
     var userMessengerId = '';
     var mf = '';

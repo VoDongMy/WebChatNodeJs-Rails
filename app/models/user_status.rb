@@ -7,7 +7,7 @@ class UserStatus < ActiveRecord::Base
     end
 
   	def self.checkStatus(id)
-      return UserStatus.where({user_id: 9}).count
+      return UserStatus.where({user_id: id}).count
     end
 
   	def self.deleteStatus(id,socketId)

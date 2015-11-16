@@ -94,6 +94,7 @@ function userChatPrivate(id) {
 function clearSocket(socketId) {
     $.ajax({
         type: "POST",
+        async: false,
         url: '/ajax/clear_socket', //sumbits it to the given url of the form
         data: {
             socketId: socketId,
@@ -101,8 +102,8 @@ function clearSocket(socketId) {
         },
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
     }).success(function(json) {
-        if (!json['userOnOff']){
-        pushOnOff(json['statusUser'].user_id, json['userOnOff']);
+        if (json['userOnOff'] == 0){
+        // pushOnOff(json['statusUser'].user_id, json['userOnOff']);
         }
         return json['userOnOff'];
     });
@@ -159,10 +160,12 @@ function createRoomServer() {
 
 function turnOnOff(id,onOff) {
     _this = $('.name-user[data-user = '+id+']');
-    if (onOff && !_this.hasClass('online')){
-        _this.addClass('online')
+    if (onOff){
+        _this.removeClass('online').addClass('online')
+        _this.text('online')
     }else{
         _this.removeClass('online')
+        _this.text('offline')
     }
 
 }
