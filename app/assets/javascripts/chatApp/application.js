@@ -103,7 +103,7 @@ function clearSocket(socketId) {
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
     }).success(function(json) {
         if (json['userOnOff'] == 0){
-        // pushOnOff(json['statusUser'].user_id, json['userOnOff']);
+        pushOnOff(json['userId'], json['userOnOff']);
         }
         return json['userOnOff'];
     });
@@ -119,7 +119,7 @@ function createSocket(ip, socketId) {
         },
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
     }).success(function(json) {
-        pushOnOff(json['statusUser'].user_id, json['userOnOff']);
+        pushOnOff(json['userId'], json['userOnOff']);
         return json['userOnOff'];
     });
 }

@@ -46,7 +46,7 @@ class UserController < ApplicationController
       if status
         User.updateOnOff(status.user_id, 1)
       end
-      render json: { success: true , statusUser: status, userOnOff: 1}
+      render json: { success: true , userId: session[:user], userOnOff: 1}
     else
       redirect_to root_path
     end
@@ -61,7 +61,7 @@ class UserController < ApplicationController
         User.updateOnOff(session[:user], 0)
         userOnOff = 0
       end
-      render json: { success: true , statusUser: status,tab: UserStatus.checkStatus(session[:user]),  userOnOff: userOnOff }
+      render json: { success: true , userId: session[:user],  userOnOff: userOnOff }
     else
       redirect_to root_path
     end
