@@ -167,7 +167,6 @@ function turnOnOff(id,onOff) {
         _this.removeClass('online')
         _this.text('offline')
     }
-
 }
 
 

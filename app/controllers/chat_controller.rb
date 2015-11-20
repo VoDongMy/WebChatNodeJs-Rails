@@ -62,6 +62,15 @@ class ChatController < ApplicationController
 	    end
   	end
 
+	def group
+	  	if auth() 
+	  		@group = GroupChat.where({prent_id: 1}).all
+	  		render :groupChat
+	    else
+	      redirect_to root_path
+	    end
+  	end
+
 	def createChatRoom
 	  	if (auth() && User.find(params[:id]))
 	  		group = UserGroupChat.checkUserGroup(session[:user],params[:id])

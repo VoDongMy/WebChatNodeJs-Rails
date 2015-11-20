@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('http://172.16.20.238:8080');
 var socketId = '';
 var userOnOff = '';
 $(document).ready(function() {

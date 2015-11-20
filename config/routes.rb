@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     post '/ajax/update_chat_room_server', to: 'chat#updateRoomServer', as: 'update_chat_room_server'
     post '/ajax/create_socket', to: 'user#createSocket', as: 'ajax_create_socket'
     post '/ajax/clear_socket', to: 'user#clearSocket', as: 'ajax_clear_socket'
-    get '/chat/private', to: 'chat#privateRoom', as: 'private_chatroom'
+    get '/chat/private', to: 'chat#privateRoom', as: 'private_chat_room'
+    get '/chat/group', to: 'chat#group', as: 'group_chat'
   # The priority is based upon order of creation: first created -> highest priority.
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
